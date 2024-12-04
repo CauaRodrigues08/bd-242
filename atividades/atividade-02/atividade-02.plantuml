@@ -1,0 +1,71 @@
+@startuml
+
+entity TB_media_types {
+    * Id: INTERGER
+    Name: NVARCHAR(120)
+}
+
+entity TB_genres {
+    * id: INTERGER
+    Name: NVARCHAR(140)
+}
+
+entity TB_playlists {
+    * id: INTERGER
+    Name: NVARCHAR(120)
+}
+
+entity TB_playlist_track{
+    * Playlistid <<FK>>
+    * Trackid <<FK>>
+}
+
+entity TB_tracks{
+    * id: INTERGER
+    Name: NVARCHAR(200)
+    Albumid: INTERGER <<FK>>
+    MediaTypeid <<FK>>
+    Genreid: INTERGER
+    Composer: NVARCHAR(220)
+    Milliseconds: INTERGER
+    Bytes: INTERGER
+    UnitPrice: NUMERIC
+}
+
+entity TB_artists {
+    * id: INTERGER
+    Name: NVARCHAR(120)
+}
+
+entity TB_invoices {
+    * id: INTERGER
+    Customerid: INTERGER <<FK>>
+    InvoiceDate: DATETIME
+    BillingAddress: NVARCHAR
+    BillingCity: NVARCHAR
+    4 more columns...
+}
+
+entity TB_invoice_items {
+    * InvoiceItemid: INTERGER
+    Invoiceid: INTERGER <<FK>>
+    Trackid: INTERGER <<FK>>
+    UnitPrice: NUMERIC <<FK>>
+    Quantity: INTERGER
+}
+
+entity TB_albums {
+    * id: INTERGER
+    Title: NVARCHAR(160)
+    Artistid: INTERGER <<FK>>
+}
+
+entity TB_customers {
+    * id: INTERGER
+}
+
+entity TB_employees {
+
+}
+
+@enduml
