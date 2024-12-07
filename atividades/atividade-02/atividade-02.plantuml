@@ -1,5 +1,4 @@
 @startuml
-
 entity TB_media_types {
     * Id: INTERGER
     Name: NVARCHAR(120)
@@ -15,12 +14,14 @@ entity TB_playlists {
     Name: NVARCHAR(120)
 }
 
-entity TB_playlist_track{
+entity TB_playlist_track {
     * Playlistid <<FK>>
     * Trackid <<FK>>
 }
+   Playlistid referencia TB_playlists
+   Trackid referencia TB_tracks
 
-entity TB_tracks{
+entity TB_tracks {
     * id: INTERGER
     Name: NVARCHAR(200)
     Albumid: INTERGER <<FK>>
@@ -31,6 +32,8 @@ entity TB_tracks{
     Bytes: INTERGER
     UnitPrice: NUMERIC
 }
+   Albumid referencia TB_albums
+   MediaTypeId referencia TB_media_types
 
 entity TB_artists {
     * id: INTERGER
@@ -45,27 +48,63 @@ entity TB_invoices {
     BillingCity: NVARCHAR
     4 more columns...
 }
+   Customerid referencia TB_customers
 
 entity TB_invoice_items {
-    * InvoiceItemid: INTERGER
+    * id: INTERGER
     Invoiceid: INTERGER <<FK>>
     Trackid: INTERGER <<FK>>
-    UnitPrice: NUMERIC <<FK>>
+    UnitPrice: NUMERIC
     Quantity: INTERGER
 }
+   Invoiceid referencia TB_invoices
+   Trackid referencia TB_tracks
+   
 
 entity TB_albums {
     * id: INTERGER
     Title: NVARCHAR(160)
     Artistid: INTERGER <<FK>>
 }
+   Artistid referencia TB_artists
 
 entity TB_customers {
     * id: INTERGER
+    FirstName: NVARCHAR(40)
+    LastName: NVARCHAR(20)
+    Company: NVARCHAR(80)
+    Adress: NVARCHAR(70)
+    City: NVARCHAR(40)
+    State: NVARCHAR(40)
+    Country: NVARCHAR(40)
+    PostalCode: NVARCHAR(10)
+    Phone: NVARCHAR(24)
+    Fax: NVARCHAR(24)
+    Email: NVARCHAR(60)
+
 }
 
 entity TB_employees {
-
+    * id: INTERGER
+    LastName: NVARCHAR(20)
+    FirstName: NVARCHAR(20)
+    Title: NVARCHAR(30)
+    ReportsTo: INTERGER
+    BirthDate: DATETIME
+    HireDate: DATETIME
+    Address: NVARCHAR(70)
+    7 more columns...
 }
 
+TB_media_types ||--o{ TB_tracks
+TB_genres |o--o{ TB_tracks
+TB_tracks ||--o| TB_playlist_track
+TB_playlist_track |o--|| TB_playlists
+TB_tracks }o--o| TB_albums
+TB_albums }o--|| TB_artists
+TB_tracks ||--o{ TB_invoice_items
+TB_invoice_items }o--|| TB_invoices
+TB_invoices }o--|| TB_customers
+TB_customers }o--o| TB_employees
+TB_employees }o--o{ TB_employees
 @enduml
