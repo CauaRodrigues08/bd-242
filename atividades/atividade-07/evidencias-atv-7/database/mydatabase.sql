@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql:3306
--- Tempo de geração: 04/02/2025 às 14:47
+-- Tempo de geração: 05/02/2025 às 03:31
 -- Versão do servidor: 8.0.41
 -- Versão do PHP: 8.2.27
 
@@ -43,6 +43,13 @@ CREATE TABLE `TB_CLIENTES` (
   `creditLimit` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Despejando dados para a tabela `TB_CLIENTES`
+--
+
+INSERT INTO `TB_CLIENTES` (`id`, `customerName`, `contactLastName`, `contactFirstName`, `phone`, `adressLine1`, `adressLine2`, `city`, `state`, `postalCode`, `country`, `salesRepEmployeeNumber`, `creditLimit`) VALUES
+('1', 'MArcelo Gomes', 'Gomes', 'Marcelo', '567891234', 'Av Alberto Magno', '889', 'Fortaleza', 'Ceará', '8888889', 'Brasil', '1', 7000);
+
 -- --------------------------------------------------------
 
 --
@@ -56,6 +63,13 @@ CREATE TABLE `TB_DETALHES_PEDIDOS` (
   `priceEach` int DEFAULT NULL,
   `orderLineNumber` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Despejando dados para a tabela `TB_DETALHES_PEDIDOS`
+--
+
+INSERT INTO `TB_DETALHES_PEDIDOS` (`id_orderNumber`, `id_productCode`, `quantityOrdered`, `priceEach`, `orderLineNumber`) VALUES
+('1', 1, 2, 65000, '1');
 
 -- --------------------------------------------------------
 
@@ -73,6 +87,13 @@ CREATE TABLE `TB_EMPREGADOS` (
   `reportsTo` varchar(20) DEFAULT NULL,
   `jobTitle` varchar(40) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Despejando dados para a tabela `TB_EMPREGADOS`
+--
+
+INSERT INTO `TB_EMPREGADOS` (`id`, `lastName`, `firstName`, `extension`, `email`, `officeCode`, `reportsTo`, `jobTitle`) VALUES
+('1', 'Dias', 'Alvaro', '3', 'alvarodias@gmail.com', '1', 'none', 'Gerente');
 
 -- --------------------------------------------------------
 
@@ -92,6 +113,13 @@ CREATE TABLE `TB_ESCRITORIOS` (
   `territory` varchar(40) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Despejando dados para a tabela `TB_ESCRITORIOS`
+--
+
+INSERT INTO `TB_ESCRITORIOS` (`id`, `city`, `phone`, `addressLine1`, `addressLine2`, `state`, `country`, `postalCode`, `territory`) VALUES
+('1', 'Fortaleza', '123456789', 'Rua 2', '56', 'Ceará', 'Brasil', '5578015', 'Nordeste');
+
 -- --------------------------------------------------------
 
 --
@@ -105,6 +133,13 @@ CREATE TABLE `TB_LINHAS_DE_PRODUTO` (
   `textDescription` varchar(80) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Despejando dados para a tabela `TB_LINHAS_DE_PRODUTO`
+--
+
+INSERT INTO `TB_LINHAS_DE_PRODUTO` (`id`, `htmlDescription`, `image`, `textDescription`) VALUES
+(1, '<p>Ford Car</p>', 'fordCar.png', 'Ford Car');
+
 -- --------------------------------------------------------
 
 --
@@ -117,6 +152,13 @@ CREATE TABLE `TB_PAGAMENTOS` (
   `paymentDate` varchar(20) DEFAULT NULL,
   `amount` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Despejando dados para a tabela `TB_PAGAMENTOS`
+--
+
+INSERT INTO `TB_PAGAMENTOS` (`id_costumerNumber`, `id`, `paymentDate`, `amount`) VALUES
+('1', '1', '30/06/2025', 70000);
 
 -- --------------------------------------------------------
 
@@ -133,6 +175,13 @@ CREATE TABLE `TB_PEDIDOS` (
   `comments` text,
   `id_customerNumber` varchar(80) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Despejando dados para a tabela `TB_PEDIDOS`
+--
+
+INSERT INTO `TB_PEDIDOS` (`id`, `orderDate`, `requiredDate`, `shippedDate`, `status`, `comments`, `id_customerNumber`) VALUES
+('1', '02/03/2025', '12/04/2025', '01/04/2025', 'aguardando confirmação', 'entregar à tarde', '1');
 
 -- --------------------------------------------------------
 
@@ -151,6 +200,13 @@ CREATE TABLE `TB_PRODUTOS` (
   `buyPrice` int DEFAULT NULL,
   `MSRP` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Despejando dados para a tabela `TB_PRODUTOS`
+--
+
+INSERT INTO `TB_PRODUTOS` (`id`, `productName`, `id_productLine`, `productScale`, `productVendor`, `productDescription`, `quantityInStock`, `buyPrice`, `MSRP`) VALUES
+(1, 'Ford Car 2015', 1, '1000', 'Ford', 'Carro Ford 3 cilindros 2015', 200, 50000, 45000);
 
 --
 -- Índices para tabelas despejadas
@@ -215,13 +271,13 @@ ALTER TABLE `TB_PRODUTOS`
 -- AUTO_INCREMENT de tabela `TB_LINHAS_DE_PRODUTO`
 --
 ALTER TABLE `TB_LINHAS_DE_PRODUTO`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `TB_PRODUTOS`
 --
 ALTER TABLE `TB_PRODUTOS`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restrições para tabelas despejadas
